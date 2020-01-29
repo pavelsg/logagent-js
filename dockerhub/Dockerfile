@@ -7,7 +7,7 @@ RUN \
   rm -rf /var/cache/apk/*
 
 RUN \
-  npm install -g --unsafe-perm @sematext/logagent && \
+  npm install -g --unsafe-perm @sematext/logagent graygelf && \
   mkdir -p /etc/sematext && \
   mkdir -p /opt/logagent && \
   touch /opt/logagent/patterns.yml && \
