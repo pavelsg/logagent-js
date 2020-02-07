@@ -164,13 +164,31 @@ fi
 # EOF
 # fi
 
+#cat >>$LA_CONFIG <<EOF
+#output:
+#  logsene:
+#    module: elasticsearch
+#    url: $LOGSENE_RECEIVER_URL
+#    index: ${LOGS_TOKEN}
+#EOF
+  if [[ -z "$GELF_COMPRESS" ]]; then
+    export GELF_COMPRESS="deflate"
+  fi
+
+  if [[ -z "$GELF_CHUNK" ]]; then
+    export GELF_CHUNK="1024"
+  fi
+
 cat >>$LA_CONFIG <<EOF
 output:
-  logsene:
-    module: elasticsearch
-    url: $LOGSENE_RECEIVER_URL
-    index: ${LOGS_TOKEN}
+  gelf:
+    module: output-gelf
+    host: ${LOG_HOST}
+    port: ${LOG_PORT}
+    compressType: ${GELF_COMPRESS}
+    chunkSize: ${GELF_CHUNK}
 EOF
+
 
 fi
 
